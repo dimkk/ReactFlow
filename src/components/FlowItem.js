@@ -6,11 +6,11 @@ import jsPlumb from 'jsplumb/dist/js/jsplumb';
 import $ from 'jquery';
 import { updateCanvasItemPosition } from '../actions';
 import { connect } from 'react-redux';
-
+const jsPlum = jsPlumb.jsPlumb;
 class FlowItem extends Component {
   handleClick() {
     // TODO Repaint is not working
-    jsPlumb.repaint('#flow-item-' + this.props.item.id);
+    jsPlum.repaint('#flow-item-' + this.props.item.id);
   }
   handleActionClick() {
     this.props.openDialogHandler();
@@ -20,14 +20,14 @@ class FlowItem extends Component {
     let component = this;
 
     $(document).ready(function () {
-      jsPlumb.draggable(id, {
+      jsPlum.draggable(id, {
         handle: '.drag-handler',
         stop: function (e) {
           component.props.dispatch(updateCanvasItemPosition(component.props.item.id, e.pos[0], e.pos[1]))
         },
         containment: true
       });
-      jsPlumb.addEndpoint(id, {
+      jsPlum.addEndpoint(id, {
           uuid: id + '-top',
           connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
@@ -37,7 +37,7 @@ class FlowItem extends Component {
           connectorStyle: { strokeWidth:2, stroke:'#444' },
           maxConnections: -1
       });
-      jsPlumb.addEndpoint(id, {
+      jsPlum.addEndpoint(id, {
           uuid: id + '-bottom',
           connector: [ "Bezier", { curviness:160 } ],
           endpoint: "Dot",
@@ -50,7 +50,7 @@ class FlowItem extends Component {
       setTimeout(function () {
         if (component.props.item.next) {
           let target = 'flow-item-' + component.props.item.next;
-          jsPlumb.connect({
+          jsPlum.connect({
             source: id,
             target: target,
             anchors:["Bottom", "Top"],

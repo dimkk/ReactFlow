@@ -13,6 +13,8 @@ import Dialog from 'material-ui/Dialog';
 import ContentAdd from 'material-ui/svg-icons/content/save';
 import jsPlumb from 'jsplumb/dist/js/jsplumb';
 
+const jsPlum = jsPlumb.jsPlumb;
+
 const canvasStyle = {
   width: '3000px',
   height: '3000px',
@@ -85,8 +87,8 @@ class FlowCanvas extends Component {
         }
       }
     });
-    jsPlumb.setContainer(this.props.id);
-    jsPlumb.bind('connection', function(info) {
+    jsPlum.setContainer(this.props.id);
+    jsPlum.bind('connection', function(info) {
       let id = getUUIDFromItemId(info.sourceId);
       let next = getUUIDFromItemId(info.targetId);
       component.props.dispatch(updateCanvasItemNext(id, next));
@@ -97,13 +99,13 @@ class FlowCanvas extends Component {
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
     ];
 

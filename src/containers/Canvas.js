@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import FlowCanvas from '../components/FlowCanvas';
 import jsPlumb from 'jsplumb/dist/js/jsplumb';
 
+const jsPlum = jsPlumb.jsPlumb;
 const getCanvasItems = (canvasItems) => {
   return canvasItems;
 };
 
 const getCanvasUi = (canvasUi) => {
-  jsPlumb.setZoom(canvasUi.zoom);
+  jsPlum.setZoom(canvasUi.zoom);
 
   return canvasUi;
 }
